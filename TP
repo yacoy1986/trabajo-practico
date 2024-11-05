@@ -1,0 +1,52 @@
+productos = []
+nombre_producto = 0
+cant_producto = 0
+nuevo_producto = [nombre_producto, cant_producto]
+opc = 0
+while opc != "3":
+    opc = input(
+        """Bienvenido!
+        1- Agregar un producto al inventario
+        2- Mostrar el inventario
+        3- salir
+        Ingrese una opcion: """
+    )
+
+    if opc == "1":
+        nombre_producto = input(print("Ingrese el nombre del producto:"))
+        cant_producto = int(
+            input(
+                print(
+                    "Indique la cantidad de este producto que va a ingresar en el inventario: "
+                )
+            )
+        )
+        if cant_producto < 1:
+            cant_producto = int(input(print("Ingrese una cantidad superior a cero: ")))
+            nuevo_producto = [nombre_producto, cant_producto]
+            productos.append(nuevo_producto)
+        else:
+            nuevo_producto = [nombre_producto, cant_producto]
+            productos.append(nuevo_producto)
+
+    #    elif opc == "2":
+    #        print("----INVENTARIO----")
+    #        for producto in productos:
+    #            print(f"Item: {producto(0)} - Cantidad: {producto(1)}")
+
+    elif opc == "2":
+        print(productos)
+
+    elif opc == "3":
+        print("Hasta luego!")
+
+    else:
+        print("ha ingresado una opcion invalida!")
+        print(
+            """ 
+        1- Agregar un producto al inventario 
+        2- Mostrar el inventario
+        3- salir
+        """
+        )
+        opc = input(print("Ingrse una opcion: "))
