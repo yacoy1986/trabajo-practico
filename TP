@@ -29,14 +29,13 @@ while opc != "3":
             nuevo_producto = [nombre_producto, cant_producto]
             productos.append(nuevo_producto)
 
-    # ------esto es lo que no me anda--------
-    #        elif opc == "2":
-    #        print("----INVENTARIO----")
-    #        for producto in productos:
-    #            print(f"Item: {producto(0)} - Cantidad: {producto(1)}")
-
     elif opc == "2":
-        print(productos)
+        print("----INVENTARIO----")
+        for producto in productos:
+            print(f"Item: {producto[0]} - Cantidad: {producto[1]}")
+
+    #    elif opc == "2":
+    #    print(productos)
 
     elif opc == "3":
         print("Hasta luego!")
@@ -50,4 +49,4 @@ while opc != "3":
         3- salir
         """
         )
-        opc = input(print("Ingrse una opcion: "))
+        opc = input(print("Ingrese una opcion: "))
