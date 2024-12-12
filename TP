@@ -42,11 +42,3 @@ while opc != "3":
 
     else:
         print("ha ingresado una opcion invalida!")
-        print(
-            """ 
-        1- Agregar un producto al inventario 
-        2- Mostrar el inventario
-        3- salir
-        """
-        )
-        opc = input(print("Ingrese una opcion: "))
