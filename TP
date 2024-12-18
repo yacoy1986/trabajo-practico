@@ -42,3 +42,119 @@ while opc != "3":
 
     else:
         print("ha ingresado una opcion invalida!")
+
+
+
+
+
+-----------------
+
+
+class Producto:
+    def __init__(self, nombre, cantidad):
+        global contador_productos
+        self.codigo = f"PROD{contador_productos:03d}"
+        contador_productos += 1
+        self.nombre = nombre
+        self.cantidad = cantidad
+
+    def __str__(self):
+        return f"Código: {self.codigo}, Nombre: {self.nombre}, Cantidad: {self.cantidad}"
+
+# Inicializar el contador de productos
+contador_productos = 1
+
+productos = []
+
+def registrar_producto():
+    nombre = input("Ingrese el nombre del producto: ")
+    while True:
+        try:
+            cantidad = int(input("Ingrese la cantidad inicial: "))
+            if cantidad >= 0:
+                break
+            else:
+                print("La cantidad no puede ser negativa. Intente nuevamente.")
+        except ValueError:
+            print("Por favor, ingrese un número entero positivo.")
+
+    nuevo_producto = Producto(nombre, cantidad)
+    productos.append(nuevo_producto)
+    print("Producto registrado exitosamente.")
+
+def consultar_producto():
+    codigo_buscar = input("Ingrese el código del producto a buscar: ")
+    for producto in productos:
+        if producto.codigo == codigo_buscar:
+            print(producto)
+            return
+    print("Producto no encontrado.")
+
+def actualizar_producto():
+    codigo_actualizar = input("Ingrese el código del producto a actualizar: ")
+    for producto in productos:
+        if producto.codigo == codigo_actualizar:
+            while True:
+                try:
+                    nueva_cantidad = int(input("Ingrese la nueva cantidad: "))
+                    if nueva_cantidad >= 0:
+                        producto.cantidad = nueva_cantidad
+                        print("Producto actualizado exitosamente.")
+                        return
+                    else:
+                        print("La cantidad no puede ser negativa. Intente nuevamente.")
+                except ValueError:
+                    print("Por favor, ingrese un número entero positivo.")
+            return
+    print("Producto no encontrado.")
+
+def eliminar_producto():
+    codigo_eliminar = input("Ingrese el código del producto a eliminar: ")
+    for i, producto in enumerate(productos):
+        if producto.codigo == codigo_eliminar:
+            del productos[i]
+            print("Producto eliminado exitosamente.")
+            return
+    print("Producto no encontrado.")
+
+def listar_productos():
+    if not productos:
+        print("No hay productos registrados.")
+    else:
+        for producto in productos:
+            print(producto)
+
+def reporte_bajo_stock():
+    print("Productos con bajo stock:")
+    for producto in productos:
+        if producto.cantidad == 0:
+            print(producto)
+
+while True:
+    print("\nMenú:")
+    print("1. Registrar producto")
+    print("2. Consultar producto")
+    print("3. Actualizar producto")
+    print("4. Eliminar producto")
+    print("5. Listar todos los productos")
+    print("6. Generar reporte de bajo stock")
+    print("7. Salir")
+    
+    opcion = input("Ingrese una opción: ")
+
+    if opcion == '1':
+        registrar_producto()
+    elif opcion == '2':
+        consultar_producto()
+    elif opcion == '3':
+        actualizar_producto()
+    elif opcion == '4':
+        eliminar_producto()
+    elif opcion == '5':
+        listar_productos()
+    elif opcion == '6':
+        reporte_bajo_stock()
+    elif opcion == '7':
+        break
+    else:
+        print("Opción inválida.")
