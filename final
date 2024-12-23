@@ -1,0 +1,114 @@
+productos = []
+
+def registrar_producto():
+    nombre = input("Ingrese el nombre del producto: ")
+    while True:
+        try:
+            cantidad = int(input("Ingrese la cantidad inicial: "))
+            if cantidad >= 0:
+                break
+            else:
+                print("La cantidad no puede ser negativa. Intente nuevamente.")
+        except ValueError:
+            print("Por favor, ingrese un número mayor a cero.")
+    while True:
+        try:
+            precio = float(input("Ingrese el precio unitario: "))
+            if precio >= 0:
+                break
+            else:
+                print("El precio no puede ser negativo. Intente nuevamente.")
+        except ValueError:
+            print("Por favor, ingrse un número mayor a cero.")
+    nuevo_producto = {"nombre": nombre, "cantidad": cantidad, "precio": precio}
+    productos.append(nuevo_producto)
+    print("Producto registrado exitosamente.")
+
+def listar_productos():
+    if not productos:
+        print("No hay productos registrados.")
+    else:
+        for producto in productos:
+            print(f"Nombre: {producto['nombre']}, Cantidad: {producto['cantidad']}, Precio: {producto['precio']}")
+
+def actualizar_producto():
+    nombre_buscar = input("Ingrese el nombre del producto a actualizar: ")
+    for producto in productos:
+        if producto["nombre"] == nombre_buscar:
+            while True:
+                try:
+                    nueva_cantidad = int(input("Ingrese la nueva cantidad: "))
+                    if nueva_cantidad >= 0:
+                        break
+                    else:
+                        print("La cantidad no puede ser negativa. Intente nuevamente.")
+                except ValueError:
+                    print("Por favor, ingrese un número mayor a cero.")
+            while True:
+                try:
+                    nuevo_precio = float(input("Ingrese el nuevo precio: "))
+                    if nuevo_precio >= 0:
+                        break
+                    else:
+                        print("El precio no puede ser negativo. Intente nuevamente.")
+                except ValueError:
+                    print("Por favor, ingrse un número mayor a cero.")
+            producto["cantidad"] = nueva_cantidad
+            producto["precio"] = nuevo_precio
+            print("Producto actualizado exitosamente.")
+            return
+    print("el producto no existe.")
+
+def eliminar_producto():
+    nombre_buscar = input("Ingrese el nombre del producto a eliminar: ")
+    for i, producto in enumerate(productos):
+        if producto["nombre"] == nombre_buscar:
+            del productos[i]
+            print("Producto eliminado exitosamente.")
+            return
+    print("el producto no existe.")
+
+def buscar_producto():
+    nombre_buscar = input("Ingrese el nombre del producto a buscar: ")
+    for producto in productos:
+        if nombre_buscar.lower() in producto["nombre"].lower():
+            print(producto)
+
+def reporte_bajo_stock():
+    minimo_stock = int(input("Ingrese la cantidad mínima de stock: "))
+    for producto in productos:
+        if producto["cantidad"] < minimo_stock:
+            print(f"Nombre: {producto['nombre']}, Cantidad: {producto['cantidad']}")
+
+def menu():
+    while True:
+        print("\nMenú:")
+        print("1. Registrar producto")
+        print("2. Listar productos")
+        print("3. Actualizar producto")
+        print("4. Eliminar producto")
+        print("5. Buscar producto")
+        print("6. Reporte de bajo stock")
+        print("7. Salir")
+
+        opcion = input("Ingrese una opción: ")
+
+        if opcion == '1':
+            registrar_producto()
+        elif opcion == '2':
+            listar_productos()
+        elif opcion == '3':
+            actualizar_producto()
+        elif opcion == '4':
+            eliminar_producto()
+        elif opcion == '5':
+            buscar_producto()
+        elif opcion == '6':
+            reporte_bajo_stock()
+        elif opcion == '7':
+            break
+        else:
+            print("Opción inválida.")
+
+if __name__ == "__main__":
+    menu()
